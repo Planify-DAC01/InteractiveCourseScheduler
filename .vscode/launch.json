@@ -2,16 +2,6 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Spring Boot-PlanifyApplication<planify>",
-            "request": "launch",
-            "cwd": "${workspaceFolder}",
-            "mainClass": "com.planify.PlanifyApplication",
-            "projectName": "planify",
-            "args": "",
-            "envFile": "${workspaceFolder}/.env"
-        },
-        {
-            "type": "java",
             "name": "Spring Boot-App<planify>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
