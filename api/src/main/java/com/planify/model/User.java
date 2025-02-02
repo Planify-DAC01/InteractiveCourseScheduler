@@ -10,6 +10,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Collection;
+import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import jakarta.persistence.Column;
 
 @Entity
@@ -17,7 +23,7 @@ import jakarta.persistence.Column;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,8 +49,22 @@ public class User {
     private String category; // "Student", "Coordinator", "Faculty"
 
     @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
+    }
+    
+    @Override
     public String toString() {
         return "User [category=" + category + ", email=" + email + ", firstname=" + firstname + ", id=" + id
                 + ", lastname=" + lastname + ", mobilenumber=" + mobilenumber + ", password=" + password + "]";
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
     }
 }
