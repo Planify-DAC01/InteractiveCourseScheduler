@@ -15,6 +15,11 @@ public class Response {
         this.message = message;
         this.data = data;
     }
+    public Response(int status, String message) {
+        this.timestamp = LocalDateTime.now();
+        this.status = status;
+        this.message = message;
+    }
     
     public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
