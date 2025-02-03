@@ -1,5 +1,8 @@
 package com.planify.model;
 
+import java.util.List;
+import java.util.Set;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,6 +24,12 @@ public class Course {
     private String description;
     private String instructor;
     private String code;
+    
+    @OneToMany(mappedBy="course")
+	private Set<User> user;
+    
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Ccoord> coordinators;
     
     @Override
     public String toString() {
