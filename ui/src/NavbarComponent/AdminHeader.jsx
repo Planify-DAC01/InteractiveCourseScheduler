@@ -24,10 +24,7 @@ const AdminHeader = () => {
     });
     sessionStorage.removeItem("active-admin");
     sessionStorage.removeItem("admin-jwtToken");
-    window.location.reload(true);
-    setTimeout(() => {
-      navigate("/home");
-    }, 2000); // Redirect after 2 seconds
+    window.location.href= '/home';
   };
 
   return (
@@ -49,7 +46,7 @@ const AdminHeader = () => {
       <DropdownButton
         as={ButtonGroup}
         title="Course"
-        variant="secondary"
+        variant="success"
         className="me-2"
       >
         <Dropdown.Item as={Link} to="/admin/grade/add">
@@ -115,7 +112,7 @@ const AdminHeader = () => {
       <DropdownButton
         as={ButtonGroup}
         title="Student"
-        variant="danger"
+        variant="warning"
         className="me-2"
       >
         <Dropdown.Item as={Link} to="/user/student/register">
@@ -128,14 +125,12 @@ const AdminHeader = () => {
       </li>
       {/* Logout Link */}
       <li className="nav-item">
-        <Link
-          to=""
-          className="nav-link active"
-          aria-current="page"
+      <button
+          className="btn btn-danger me-2" // Red color
           onClick={adminLogout}
         >
-          <b className="text-color">Logout</b>
-        </Link>
+          <b>Logout</b>
+        </button>
         <ToastContainer />
       </li>
     </ul>

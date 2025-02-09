@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -19,47 +19,47 @@ const HeaderStudent = () => {
     });
     sessionStorage.removeItem("active-student");
     sessionStorage.removeItem("student-jwtToken");
-    window.location.reload(true);
-    setTimeout(() => {
-      navigate("/home");
-    }, 2000); // Redirect after 3 seconds
+    window.location.href= '/home';
   };
 
   const viewStudentProfile = () => {
     navigate("/user/profile/detail", { state: student });
   };
 
+  const navigateToTimetable = () => {
+    navigate("/student/timetable");
+  };
+
   return (
-    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-5">
-      <li class="nav-item">
-        <Link
-          to="/student/timetable"
-          class="nav-link active"
-          aria-current="page"
+    <ul className="navbar-nav ms-auto mb-2 mb-lg-0 me-5">
+      <li className="nav-item">
+        <button
+          className="btn btn-primary me-2" // Blue color
+          onClick={navigateToTimetable}
         >
-          <b className="text-color">Time Table</b>
-        </Link>
+          <b>Time Table</b>
+        </button>
       </li>
 
-      <li class="nav-item">
-        <div class="nav-link active" aria-current="page">
-          <b className="text-color" onClick={viewStudentProfile}>
-            My Profile
-          </b>
-          <ToastContainer />
-        </div>
+      <li className="nav-item">
+        <button
+          className="btn btn-warning me-2" // Green color
+          onClick={viewStudentProfile}
+        >
+          <b>My Profile</b>
+        </button>
       </li>
-      <li class="nav-item">
-        <Link
-          to=""
-          class="nav-link active"
-          aria-current="page"
+
+      <li className="nav-item">
+        <button
+          className="btn btn-danger me-2" // Red color
           onClick={userLogout}
         >
-          <b className="text-color">Logout</b>
-        </Link>
-        <ToastContainer />
+          <b>Logout</b>
+        </button>
       </li>
+
+      <ToastContainer />
     </ul>
   );
 };

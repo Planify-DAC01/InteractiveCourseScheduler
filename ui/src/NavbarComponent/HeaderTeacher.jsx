@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -19,84 +19,60 @@ const HeaderTeacher = () => {
     });
     sessionStorage.removeItem("active-teacher");
     sessionStorage.removeItem("teacher-jwtToken");
-    window.location.reload(true);
-    setTimeout(() => {
-      navigate("/home");
-    }, 2000); // Redirect after 3 seconds
+    window.location.href= '/home';
   };
 
   const viewProfile = () => {
     navigate("/user/profile/detail", { state: teacher });
   };
 
+  const navigateToTimetable = () => {
+    navigate("/teacher/timetable");
+  };
+
+  const navigateToViewStudents = () => {
+    navigate("/admin/student/all");
+  };
+
   return (
-    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-5">
-      <li class="nav-item">
-        <Link
-          to="/teacher/timetable"
-          class="nav-link active"
-          aria-current="page"
+    <ul className="navbar-nav ms-auto mb-2 mb-lg-0 me-5">
+      <li className="nav-item">
+        <button
+          className="btn btn-primary me-2" // Blue color
+          onClick={navigateToTimetable}
         >
-          <b className="text-color">Time Table</b>
-        </Link>
-      </li>
-      {/* <li class="nav-item">
-        <Link
-          to="/teacher/batch/transfer"
-          class="nav-link active"
-          aria-current="page"
-        >
-          <b className="text-color">Transfer Batch</b>
-        </Link>
-      </li> */}
-      {/* <li class="nav-item">
-        <Link
-          to="/teacher/batch/deactivate"
-          class="nav-link active"
-          aria-current="page"
-        >
-          <b className="text-color">Deactivate Batch</b>
-        </Link>
-      </li> */}
-      {/* <li class="nav-item">
-        <Link
-          to="/user/student/register"
-          class="nav-link active"
-          aria-current="page"
-        >
-          <b className="text-color">Register Student</b>
-        </Link>
-      </li> */}
-      <li class="nav-item">
-        <Link
-          to="/admin/student/all"
-          class="nav-link active"
-          aria-current="page"
-        >
-          <b className="text-color">View Students</b>
-        </Link>
+          <b>Time Table</b>
+        </button>
       </li>
 
-      <li class="nav-item">
-        <div class="nav-link active" aria-current="page">
-          <b className="text-color" onClick={viewProfile}>
-            My Profile
-          </b>
-          <ToastContainer />
-        </div>
+      <li className="nav-item">
+        <button
+          className="btn btn-primary me-2" // Green color
+          onClick={navigateToViewStudents}
+        >
+          <b>View Students</b>
+        </button>
       </li>
 
-      <li class="nav-item">
-        <Link
-          to=""
-          class="nav-link active"
-          aria-current="page"
+      <li className="nav-item">
+        <button
+          className="btn btn-warning me-2" // Yellow color
+          onClick={viewProfile}
+        >
+          <b>My Profile</b>
+        </button>
+      </li>
+
+      <li className="nav-item">
+        <button
+          className="btn btn-danger me-2" // Red color
           onClick={userLogout}
         >
-          <b className="text-color">Logout</b>
-        </Link>
-        <ToastContainer />
+          <b>Logout</b>
+        </button>
       </li>
+
+      <ToastContainer />
     </ul>
   );
 };
