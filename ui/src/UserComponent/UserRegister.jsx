@@ -98,7 +98,7 @@ const UserRegister = () => {
               });
 
               setTimeout(() => {
-                navigate("/user/login");
+                navigate("/home");
               }, 1000);
             } else if (!res.success) {
               toast.error(res.responseMessage, {
