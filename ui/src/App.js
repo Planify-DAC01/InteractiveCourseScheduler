@@ -1,52 +1,79 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { useState } from 'react';
-import SignIn from './Components/SignIn';
-import './App.css';
-import Main from './Components/Main';
-import Footer from './Components/Footer';
-import Navbar from './Components/Navbar';
-import SignUp from './Components/SignUp';
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { faCoffee, faHome, faPeopleGroup } from "@fortawesome/free-solid-svg-icons";
+import { Routes, Route } from "react-router-dom";
+import Header from "./NavbarComponent/Header";
+import AdminRegisterForm from "./UserComponent/AdminRegisterForm";
+import UserLoginForm from "./UserComponent/UserLoginForm";
+import UserRegister from "./UserComponent/UserRegister";
+import AboutUs from "./PageComponent/AboutUs";
+import ContactUs from "./PageComponent/ContactUs";
+import HomePage from "./PageComponent/HomePage";
+import AddGradeForm from "./GradeComponent/AddGradeForm";
+import UpdateGradeForm from "./GradeComponent/UpdateGradeForm";
+import ViewAllGrades from "./GradeComponent/ViewAllGrades";
+import ViewAllCourses from "./CourseComponent/ViewAllCourses";
+import AddCourseForm from "./CourseComponent/AddCourseForm";
+import UpdateCourseForm from "./CourseComponent/UpdateCourseForm";
+import ViewAllTeachers from "./UserComponent/ViewAllTeachers";
+import ViewAllStudents from "./UserComponent/ViewAllStudents";
+import UserProfile from "./UserComponent/UserProfile";
+import AddBatchForm from "./BatchComponent/AddBatchForm";
+import ViewAllBatches from "./BatchComponent/ViewAllBatches";
+import UpdateBatchForm from "./BatchComponent/UpdateBatchForm";
+import AddTimetablePage from "./TimeTableComponent/AddTimetablePage";
+import TimeTable from "./TimeTableComponent/TimeTable";
+import SearchTimeTable from "./TimeTableComponent/SearchTimeTable";
+import TeacherTimetable from "./TimeTableComponent/TeacherTimetable";
+import StudentTimetable from "./TimeTableComponent/StudentTimetable";
+import StudentBatchDeactivate from "./UserComponent/StudentBatchDeactivate";
+import StudentBatchTransfer from "./UserComponent/StudentBatchTransfer";
 
-// Adding FontAwesome icons to the library
-library.add(faCoffee, faHome, faPeopleGroup);
 
 function App() {
-  // State to store the current user
-  const [user, setUser] = useState(null);
-
   return (
     <div>
-      <div className="App">
-        <header className="App-header">
-          {/* Add any logo or header image if required */}
-          <h1>Planify</h1>
-        </header>
-      </div>
-
-      <section>
-        <div className='Main'>
-          <Router>
-            <Navbar />  {/* Navbar is rendered globally */}
-            <Routes>
-              <Route path="/" element={<Main />} />
-              <Route 
-                path="/signup" 
-                element={<SignUp setUser={setUser} />}  // Pass setUser function to SignUp
-              />
-              <Route 
-                path="/Signin" 
-                element={<SignIn setUser={setUser} />}  // Pass setUser function to SignIn
-              />
-            </Routes>
-          </Router>
-        </div>
-      </section>
-
-      <div id="footer">
-        <Footer />  {/* Footer is rendered globally */}
-      </div>
+      <Header />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/user/admin/register" element={<AdminRegisterForm />} />
+        <Route path="/user/login" element={<UserLoginForm />} />
+        <Route path="/user/student/register" element={<UserRegister />} />
+        <Route path="/user/teacher/register" element={<UserRegister />} />
+        <Route path="/aboutus" element={<AboutUs />} />
+        <Route path="/contactus" element={<ContactUs />} />
+        <Route path="/admin/grade/add" element={<AddGradeForm />} />
+        <Route path="/admin/grade/all" element={<ViewAllGrades />} />
+        <Route path="/admin/grade/update" element={<UpdateGradeForm />} />
+        <Route path="/admin/course/add" element={<AddCourseForm />} />
+        <Route path="/admin/course/all" element={<ViewAllCourses />} />
+        <Route path="/admin/course/update" element={<UpdateCourseForm />} />
+        <Route path="/admin/batch/add" element={<AddBatchForm />} />
+        <Route path="/admin/batch/all" element={<ViewAllBatches />} />
+        <Route path="/admin/batch/update" element={<UpdateBatchForm />} />
+        <Route
+          path="/admin/grade/:gradeId/course/"
+          element={<ViewAllCourses />}
+        />
+        <Route
+          path="/admin/grade/:gradeId/batch/"
+          element={<ViewAllBatches />}
+        />
+        <Route path="/admin/student/all" element={<ViewAllStudents />} />
+        <Route path="/admin/teacher/all" element={<ViewAllTeachers />} />
+        <Route path="/user/profile/detail" element={<UserProfile />} />
+        <Route path="/admin/timetable/add" element={<AddTimetablePage />} />
+        <Route path="/timetable/view" element={<TimeTable />} />
+        <Route path="/admin/timetable/search" element={<SearchTimeTable />} />
+        <Route path="/teacher/timetable" element={<TeacherTimetable />} />
+        <Route path="/student/timetable" element={<StudentTimetable />} />
+        <Route
+          path="/teacher/batch/deactivate"
+          element={<StudentBatchDeactivate />}
+        />
+        <Route
+          path="/teacher/batch/transfer"
+          element={<StudentBatchTransfer />}
+        />
+      </Routes>
     </div>
   );
 }

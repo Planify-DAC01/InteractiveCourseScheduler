@@ -2,10 +2,27 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Test",
+            "request": "launch",
+            "mainClass": "com.planify.auth.Test",
+            "projectName": "planify"
+        },
+        {
+            "type": "java",
             "name": "Spring Boot-App<planify>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
             "mainClass": "com.planify.App",
+            "projectName": "planify",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-UniversityTimetableManagementApplication<planify>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.timetable.UniversityTimetableManagementApplication",
             "projectName": "planify",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
