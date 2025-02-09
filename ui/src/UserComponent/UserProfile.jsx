@@ -23,7 +23,7 @@ const UserProfile = () => {
             <div>
               <p className="mb-2">
                 <b>
-                  Role: <span className="text-color-second"> {user.role}</span>
+                  Role: <span className="text-color-black"> {user.role}</span>
                 </b>
               </p>
             </div>
