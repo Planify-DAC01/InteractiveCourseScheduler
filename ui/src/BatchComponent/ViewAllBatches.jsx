@@ -179,12 +179,20 @@ const ViewAllBatches = () => {
                         {(() => {
                           if (batch.timeTableUploaded === true) {
                             return (
-                              <button
-                                onClick={() => navigateToViewTimeTable(batch)}
-                                className="btn btn-sm bg-success custom-bg-text ms-2"
-                              >
-                                View Time Table
-                              </button>
+                              <div>
+                                <button
+                                  onClick={() => navigateToViewTimeTable(batch)}
+                                  className="btn btn-sm bg-success custom-bg-text ms-2"
+                                >
+                                  View Time Table
+                                </button>
+                                <button
+                                  onClick={() => navigateToAddTimeTable(batch)}
+                                  className="btn btn-sm bg-info custom-bg-text ms-2"
+                                >
+                                  Upload Time Table
+                                </button>
+                              </div>
                             );
                           } else {
                             return (

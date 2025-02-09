@@ -26,6 +26,16 @@
             "projectName": "planify",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-UniversityTimetableManagementApplication<university-timetable-management>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.timetable.UniversityTimetableManagementApplication",
+            "projectName": "university-timetable-management",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }

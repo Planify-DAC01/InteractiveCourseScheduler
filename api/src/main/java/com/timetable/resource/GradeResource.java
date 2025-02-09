@@ -11,11 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.timetable.dao.GradeDao;
 import com.timetable.dto.CommonApiResponse;
-import com.timetable.dto.GradeBatch;
 import com.timetable.dto.GradeBatchResponse;
 import com.timetable.dto.GradeResponseDto;
 import com.timetable.entity.Batch;

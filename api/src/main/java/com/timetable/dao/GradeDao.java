@@ -1,6 +1,5 @@
 package com.timetable.dao;
 
-import java.lang.StackWalker.Option;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
