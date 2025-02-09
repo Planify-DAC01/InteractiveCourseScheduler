@@ -1,5 +1,6 @@
 package com.timetable.resource;
-
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -33,6 +34,9 @@ import com.timetable.service.CourseService;
 import com.timetable.service.GradeService;
 import com.timetable.service.TimeTableService;
 import com.timetable.service.UserService;
+import com.timetable.utility.EmailService;
+import com.timetable.utility.Constants.ActiveStatus;
+import com.timetable.utility.Constants.UserRole;
 
 import io.micrometer.common.util.StringUtils;
 import jakarta.transaction.Transactional;
@@ -61,6 +65,10 @@ public class TimeTableResourse {
 	@Autowired
 	private ObjectMapper objectMapper;
 
+	@Autowired
+	private EmailService emailService;
+	
+	
 	public ResponseEntity<CommonApiResponse> addTimeTable(AddTimeTableRequest request) {
 
 		LOG.info("Request received for add course");
@@ -152,10 +160,68 @@ public class TimeTableResourse {
 			throw new TimeTableSaveFailedException("Exception Caught While Saving the TimeTable");
 		}
 
+		List<User> batchStudents = this.userService.getUserByRoleAndBatchAndStatus(UserRole.ROLE_STUDENT.value(), batch,
+				ActiveStatus.ACTIVE.value());
+		
+//		StringBuilder messageBuilder = new StringBuilder();
+//		messageBuilder.append("<html>")
+//		    .append("<body style='font-family: Arial, sans-serif; color: #333; line-height: 1.6;'>")
+//		    .append("<p>Dear ").append(u.getName()).append(",</p>")
+//		    .append("<p>We hope you're doing well. A new timetable has been added for your batch.</p>")
+//		    .append("<p>Timetable details: ").append(table.toString()).append("</p>")
+//		    .append("<p>Regards,</p>")
+//		    .append("<p><strong>Management Team</strong></p>")
+//		    .append("</body></html>");
+//
+//		String message = messageBuilder.toString();
+		
+//		String subject = "New Timetable Added – Stay Updated with Your Schedule!!!";
+//		String message =  "<html>"
+//		        + "<body style='font-family: Arial, sans-serif; color: #333; line-height: 1.6;'>"
+//		        + "<p>Dear Student,</p>"
+//		        + "<p>We hope you're doing well. A new timetable has been added for your batch.</p>"
+//		        + "<p>Regards,</p>"
+//		        + "<p><strong>Management Team</strong></p>"
+//		        + "</body></html>";
+	
+//		batchStudents.stream().forEach(u -> {
+//			try {
+//				System.out.println("<p>Dear Student, %u.getFirstName()</p>" );
+//				this.emailService.sendEmail(u.getEmailId(), subject, message);
+//				
+//			} catch (Exception e) {
+//				System.out.println(e.getMessage());
+//			}
+//		});
+
+		batchStudents.forEach(u -> {
+		    try {
+		        // Corrected message with student's first name
+				String subject = "New Timetable Added – Stay Updated with Your Schedule!!!";
+		    	String message = String.format(
+		            "<html>"
+		            + "<body style='font-family: Arial, sans-serif; color: #333; line-height: 1.6;'>"
+		            + "<p>Dear %s,</p>"  // Insert student's first name
+		            + "<p>We hope you're doing well. A new timetable has been added for your batch.</p>"
+		            + "<p>Regards,</p>"
+		            + "<p><strong>Management Team</strong></p>"
+		            + "</body></html>",
+		            u.getFirstName()// Dynamically replace %s with student's first name
+		        );
+
+		        // Sending email
+		        this.emailService.sendEmail(u.getEmailId(), subject, message);
+		        
+		    } catch (Exception e) {
+		        System.out.println("Error sending email to " + u.getEmailId() + ": " + e.getMessage());
+		    }
+		});
+		
 		response.setResponseMessage("Time Table Saved Successful!!!");
 		response.setSuccess(true);
 
 		return new ResponseEntity<CommonApiResponse>(response, HttpStatus.OK);
+		
 	}
 
 	public ResponseEntity<TimeTableResponse> fetchTimeTable(Integer batchId) {
